@@ -5,17 +5,21 @@
     "pkg-config@latest",
     "qt6.qtbase@latest",
     "gnumake@latest",
-    "gcc@latest",
+    "gcc@14.3.0",
     "path:nix#fftw-full",
     "path:nix#opengl-full",
     "path:nix#ffmpeg-full",
-    "path:nix#xkb-full"
+    "path:nix#xkb-full",
+    "git@latest"
   ],
   "shell": {
     "scripts": {
       "configure": ["cmake -B build -DUSE_QWT=OFF -DUSE_QT_VERSION=6"],
-      "build": ["cmake --build build -j$(nproc)"],
-      "rebuild": ["cmake -B build -DUSE_QWT=OFF -DUSE_QT_VERSION=6", "cmake --build build -j$(nproc)"],
+      "build":     ["cmake --build build -j$(nproc)"],
+      "rebuild": [
+        "cmake -B build -DUSE_QWT=OFF -DUSE_QT_VERSION=6",
+        "cmake --build build -j$(nproc)"
+      ],
       "clean": ["rm -rf build"]
     },
     "init_hook": [
