@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.0/.schema/devbox.schema.json",
+  "packages": [
+    "cmake@latest",
+    "pkg-config@latest",
+    "qt6.qtbase@latest",
+    "gnumake@latest",
+    "gcc@latest",
+    "path:nix#fftw-full",
+    "path:nix#opengl-full",
+    "path:nix#ffmpeg-full",
+    "path:nix#xkb-full"
+  ],
+  "shell": {
+    "scripts": {
+      "configure": ["cmake -B build -DUSE_QWT=OFF -DUSE_QT_VERSION=6"],
+      "build": ["cmake --build build -j$(nproc)"],
+      "rebuild": ["cmake -B build -DUSE_QWT=OFF -DUSE_QT_VERSION=6", "cmake --build build -j$(nproc)"],
+      "clean": ["rm -rf build"]
+    },
+    "init_hook": [
+      "echo ''",
+      "echo '╔═══════════════════════════════════════════════════════════════════════════╗'",
+      "echo '║                  vhs-decode Build Environment (devbox)                    ║'",
+      "echo '╠═══════════════════════════════════════════════════════════════════════════╣'",
+      "echo '║ Build commands:                                                           ║'",
+      "echo '║   devbox run configure   # Configure cmake                                ║'",
+      "echo '║   devbox run build       # Build all tools                                ║'",
+      "echo '║   devbox run rebuild     # Configure + build                              ║'",
+      "echo '║   devbox run clean       # Remove build directory                         ║'",
+      "echo '║                                                                           ║'",
+      "echo '║ Binaries output:                                                          ║'",
+      "echo '║   build/tools/ld-chroma-decoder/ld-chroma-decoder                         ║'",
+      "echo '║   build/tools/ld-dropout-correct/ld-dropout-correct                       ║'",
+      "echo '║   build/tools/ld-process-vbi/ld-process-vbi                               ║'",
+      "echo '║   ... and more in build/tools/                                            ║'",
+      "echo '╚═══════════════════════════════════════════════════════════════════════════╝'",
+      "echo ''"
+    ]
+  }
+}
